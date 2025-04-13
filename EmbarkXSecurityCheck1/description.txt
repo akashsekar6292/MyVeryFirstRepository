@@ -1,0 +1,17 @@
+When we give 
+		http://localhost:8080/hello 
+it redirect to 
+		http://localhost:8080/login
+and ask for username and password
+After give username(user) and password(auto-generated in console) 
+it redirect to 
+		http://localhost:8080/hello?continue
+		
+		
+In inspect >> Network >> login - 302
+						 hello?continue -200
+						 
+						 
+To have custom username and password 
+go to application.properties >> spring.security.user.password=heybuddy
+								spring.security.user.name=sivaji
