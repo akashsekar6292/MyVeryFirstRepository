@@ -1,71 +1,8 @@
-								the logic for the validation form when we give the
-			http://localhost:8080/hello
-is already written and we can view the form Maven Dependencies >> spring-boot-autoconfigure-3.4.4.jar >> rg.springframework.boot.autoconfigure.security.servlet >> SpringBootWebSecurityConfiguration.class
-  		or else SpringBootWebSecurityConfiguration >> open declaration.
-  		
-create a class to write security configuration and copy and paste the necessary lines from SpringBootWebSecurityConfiguration class
-among this two filter
-		http.formLogin(withDefaults());
-		http.httpBasic(withDefaults());
-		
+managing multiple user in in-memory Authentication
 
-		
-1.if i only enable formLogin 
-login
-	(Header)
-	302
-	cookie: JSESSIONID=80C78DC139CB41683566678E5163EC65
-	
-	(Payload)
-	username: sivaji
-	password: heybuddy
-_	csrf: TA1LcfD91duUCcE4Fk3713-TvIEiAAAGqJoy_t-HbVckMo2uKWsuRcLK5725MfJZL2DP5h7wkeMVMDkrza8Lmru3WTUcBumc
+here we create a bean(@User) for UserDetailService to have multiple users.
+For each users we set separate username and password.
 
-	(Cookie)
-	JsessionId
-	JsessionId
-	
-hello?continue
-	(Header)
-	200
-	x-content-type-options: nosniff
-	x-frame-options: DENY
-	x-xss-protection: 0
-	authorization: Basic c2l2YWppOmhleWJ1ZGR5
-	cookie: JSESSIONID=D41DB0A992537CF25E247E61EABBDE73
-	
-	(Cookie)
-	JsessionId
+we can able to give the details of the user for authentication.
 
-2. if i only enable httpBasic
-
-it does not redirect to any other page. stays in hello page only, 
-authentication are made in pop up display.
-
-hello
-	(Header)
-	200
-	x-content-type-options: nosniff
-	x-frame-options: DENY
-	x-xss-protection: 0
-	authorization: Basic c2l2YWppOmhleWJ1ZGR5
-	cookie: JSESSIONID=842FA9C1370E5F9C5B792CFD8575578A
-	
-	(Cookie)
-	JsessionId
----------------------------------------------------------
-Basic c2l2YWppOmhleWJ1ZGR5
-c2l2YWppOmhleWJ1ZGR5 is the encripted of our username and password. We can view this by 
-base64 decode website. it display sivaji:heybuddy.
-
-	
----------------------------------------------------------
-http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-this line of code along with httpBasic
-
-is run as Stateless which mean does not create a cookie or JsessionId.
-	
-	x (Header)
-	x cookie: JSESSIONID=842FA9C1370E5F9C5B792CFD8575578A
-	x (Cookie)
-	x JsessionId
+If we give the username and password that we stated in application.properties, the request get unauthorized.
