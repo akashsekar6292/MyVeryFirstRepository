@@ -1,5 +1,16 @@
-Role Based Authentication
-In previous chapter, we have managing multiple user but here we create a various endpoints for various user
-	to access the endpoint only by that user. if we give mismatched authentication it show 403 error.
-	With the help of these annotations @PreAuthorize("hasRole('USER')")
-									   @EnableMethodSecurity
+adding dependencies for jpa and h2 database. give configuration for h2 in application.properties file.
+
+.requestMatchers("/h2-console/**").permitAll() ---> this enables the h2 console login page without any login.
+
+
+
+http.headers(headers->headers.
+frameOptions(HeadersConfigurer
+.FrameOptionsConfig::sameOrigin));  ----->To display h2 database instead of multiple frames
+
+
+
+
+http.csrf(csrf->csrf.disable());    -->   To bypass authentication and go h2 console straightly.
+    
+    
